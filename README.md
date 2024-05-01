@@ -32,6 +32,14 @@
 $ docker-compose up
 ```
 
+Create a file .env with this template
+
+```yaml
+APP_PORT=3000
+TELEGRAM_BOT_TOKEN=TOKEN
+TELEGRAM_GROUP_ID=GROUP
+```
+
 ## Running the app
 
 ```bash
