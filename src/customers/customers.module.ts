@@ -6,6 +6,7 @@ import { CustomerRepositoryMongoAdapter } from '@customers/infrastructure/storag
 import { CustomerEntity } from './domain/customer.entity.orm';
 import { CreateCustomerUseCase } from './use-cases/create/create-customer.use-case';
 import { CustomersCreateController } from './presentation/create/customers-create.controller';
+import { CustomerCreatedHandler } from './infrastructure/event-handlers/customer-created.handler';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CustomerEntity])],
@@ -17,6 +18,7 @@ import { CustomersCreateController } from './presentation/create/customers-creat
       provide: 'CustomerRepositoryPort',
       useClass: CustomerRepositoryMongoAdapter,
     },
+    CustomerCreatedHandler,
   ],
 })
 export class CustomersModule {}
