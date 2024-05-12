@@ -1,14 +1,13 @@
 import { CustomerCreatedEvent } from '@customers/domain/events/customer-created';
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { TelegramNotificationService } from 'src/infrastructure/notifications/telegram/telegram-notification.service';
+import { TelegramNotificationPort } from '@shared/domain/ports/telegram-notification.port';
 
 @Injectable()
 export class CustomerCreatedHandler {
   constructor(
-    private readonly configService: ConfigService,
-    private readonly telegramService: TelegramNotificationService,
+    @Inject(TelegramNotificationPort)
+    private readonly telegramService: TelegramNotificationPort,
   ) {}
   @OnEvent('customer.created')
   handleCustomerCreatedEvent(event: CustomerCreatedEvent): void {

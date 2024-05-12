@@ -9,7 +9,7 @@ import { CustomerCreatedEvent } from '@customers/domain/events/customer-created'
 @Injectable()
 export class CreateCustomerUseCase {
   constructor(
-    @Inject('CustomerRepositoryPort')
+    @Inject(CustomerRepositoryPort)
     private readonly customerRepository: CustomerRepositoryPort,
     private readonly eventEmitter: EventEmitter2,
   ) {}

@@ -5,7 +5,7 @@ import { Customer } from '@customers/domain/customers.domain';
 @Injectable()
 export class FindCustomerUseCase {
   constructor(
-    @Inject('CustomerRepositoryPort')
+    @Inject(CustomerRepositoryPort)
     private readonly customerRepository: CustomerRepositoryPort,
   ) {}
   async execute(query?: any): Promise<Customer[]> {

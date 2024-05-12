@@ -1,5 +1,4 @@
-import { UUID } from 'typeorm/driver/mongodb/bson.typings';
-import { CustomerEntity } from './customer.entity.orm';
+import { CustomerEntity } from '@customers/infrastructure/storage/orm/customer.entity.orm';
 import { Customer } from './customers.domain';
 import { randomUUID } from 'crypto';
 

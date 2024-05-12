@@ -5,9 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CustomersModule } from './customers/customers.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { CustomerEntity } from '@customers/domain/customer.entity.orm';
+import { CustomerEntity } from '@customers/infrastructure/storage/orm/customer.entity.orm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { SharedModule } from './infrastructure/shared.module';
+import { SharedModule } from './shared/infrastructure/shared.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 
 @Module({

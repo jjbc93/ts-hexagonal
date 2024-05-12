@@ -25,13 +25,19 @@ export class Customer {
       (this.fullName = `${params.name} ${params.lastName}`);
   }
 
-  static createWithoutValidation(params: CustomerParams) {
+  static createWithoutValidation(params: CustomerParams): Customer {
     Logger.debug('Skip validation', 'Customer');
     return new Customer(params);
   }
 
-  static createWithValidation(params: CustomerParams) {
+  static createWithValidation(params: CustomerParams): Customer {
     Logger.debug('Apply validation', 'Customer');
     return new Customer(params);
+  }
+
+  updateCustomer(name: string, lastName: string): void {
+    this.name = name;
+    this.lastName = lastName;
+    Logger.debug('Apply validation', 'Customer');
   }
 }
