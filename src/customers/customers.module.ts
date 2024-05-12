@@ -10,6 +10,8 @@ import { CustomerCreatedHandler } from './infrastructure/event-handlers/customer
 import { CustomerRepositoryPort } from './domain/ports/customer-repository.port';
 import { UpdateCustomerUseCase } from './use-cases/update/create/update-customer.use-case';
 import { CustomersUpdateController } from './presentation/update/customers-update.controller';
+import { FindOneCustomerUseCase } from './use-cases/find-one/find-customers.use-case';
+import { CustomersFindOneController } from './presentation/find-one/customers-find-one.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CustomerEntity])],
@@ -17,16 +19,18 @@ import { CustomersUpdateController } from './presentation/update/customers-updat
     CustomersFindController,
     CustomersCreateController,
     CustomersUpdateController,
+    CustomersFindOneController,
   ],
   providers: [
-    FindCustomerUseCase,
-    CreateCustomerUseCase,
     {
       provide: CustomerRepositoryPort,
       useClass: CustomerRepositoryOrmAdapter,
     },
+    FindCustomerUseCase,
+    CreateCustomerUseCase,
     CustomerCreatedHandler,
     UpdateCustomerUseCase,
+    FindOneCustomerUseCase,
   ],
 })
 export class CustomersModule {}
