@@ -9,6 +9,7 @@ import { CustomerEntity } from '@customers/infrastructure/storage/orm/customer.e
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { SharedModule } from './shared/infrastructure/shared.module';
 import { TelegrafModule } from 'nestjs-telegraf';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -34,6 +35,23 @@ import { TelegrafModule } from 'nestjs-telegraf';
     SharedModule,
     CustomersModule,
     EventEmitterModule.forRoot(),
+    MailerModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        transport: {
+          host: configService.get<string>('SMTP_HOST'),
+          port: 587,
+          secure: false,
+          auth: {
+            user: configService.get<string>('SMTP_USER'),
+            pass: configService.get<string>('SMTP_PASSWORD'),
+          },
+        },
+        defaults: {
+          from: 'ts-ddd <modules@nestjs.com>',
+        },
+      }),
+      inject: [ConfigService],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

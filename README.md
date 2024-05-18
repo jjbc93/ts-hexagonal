@@ -32,12 +32,17 @@
 $ docker-compose up
 ```
 
-Create a file .env with this template
+Create a file .env with this template (env.template) file
 
 ```yaml
 APP_PORT=3000
-TELEGRAM_BOT_TOKEN=TOKEN
-TELEGRAM_GROUP_ID=GROUP
+TELEGRAM_BOT_TOKEN= #TOKEN
+TELEGRAM_GROUP_ID=  #GROUP_ID
+EMAIL_FROM= #EMAIL
+EMAIL_SUBJECT_CUSTOMER= #CUSTOMER
+SMTP_HOST= #HOST
+SMTP_USER= #USER
+SMTP_PASSWORD= #PASSWORD
 ```
 
 ## Running the app

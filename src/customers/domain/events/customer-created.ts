@@ -1,3 +1,4 @@
+export const CustomerCreated = Symbol('customer.created');
 export class CustomerCreatedEvent {
   name: string;
 

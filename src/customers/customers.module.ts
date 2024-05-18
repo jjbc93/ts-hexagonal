@@ -12,6 +12,11 @@ import { UpdateCustomerUseCase } from './use-cases/update/create/update-customer
 import { CustomersUpdateController } from './presentation/update/customers-update.controller';
 import { FindOneCustomerUseCase } from './use-cases/find-one/find-customers.use-case';
 import { CustomersFindOneController } from './presentation/find-one/customers-find-one.controller';
+import { EmailNotificationPort } from '@shared/domain/ports/email-notification.port';
+import { ConfigService } from '@nestjs/config';
+import { MailerService } from '@nestjs-modules/mailer';
+import { EmailNotificationAdapterService } from '@shared/infrastructure/notifications/emails/emails-notification.adapter';
+import { EmailConfigParams } from '@shared/domain/email-config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CustomerEntity])],
@@ -31,6 +36,20 @@ import { CustomersFindOneController } from './presentation/find-one/customers-fi
     CustomerCreatedHandler,
     UpdateCustomerUseCase,
     FindOneCustomerUseCase,
+    {
+      provide: EmailNotificationPort,
+      useFactory: async (
+        configService: ConfigService,
+        mailerService: MailerService,
+      ) => {
+        const config: EmailConfigParams = {
+          from: configService.get<string>('EMAIL_FROM'),
+          subject: configService.get<string>('EMAIL_SUBJECT_CUSTOMER'),
+        };
+        return new EmailNotificationAdapterService(config, mailerService);
+      },
+      inject: [ConfigService, MailerService],
+    },
   ],
 })
 export class CustomersModule {}
