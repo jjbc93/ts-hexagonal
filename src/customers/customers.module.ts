@@ -17,9 +17,10 @@ import { ConfigService } from '@nestjs/config';
 import { MailerService } from '@nestjs-modules/mailer';
 import { EmailNotificationAdapterService } from '@shared/infrastructure/notifications/emails/emails-notification.adapter';
 import { EmailConfigParams } from '@shared/domain/email-config';
+import { BlockFigureEntity } from '@block-figure/infrastructure/storage/orm/block-figure.orm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CustomerEntity])],
+  imports: [TypeOrmModule.forFeature([CustomerEntity, BlockFigureEntity])],
   controllers: [
     CustomersFindController,
     CustomersCreateController,

@@ -1,4 +1,12 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { BlockFigureDto } from '@block-figure/presentation/block-figure.dto';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateCustomerDto {
   @IsNotEmpty()
@@ -12,4 +20,8 @@ export class CreateCustomerDto {
   @IsString()
   @IsEmail()
   email: string;
+
+  @IsObject()
+  @IsOptional()
+  blockFigure?: BlockFigureDto;
 }

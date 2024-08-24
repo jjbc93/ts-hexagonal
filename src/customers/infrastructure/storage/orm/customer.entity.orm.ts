@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BlockFigureEntity } from '@block-figure/infrastructure/storage/orm/block-figure.orm';
+import { blockFigureArray } from '@customers/domain/customers.domain';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CustomerBlockFigureEntity } from './customer-block-figure.entity';
 
 @Entity()
 export class CustomerEntity {
@@ -16,4 +19,10 @@ export class CustomerEntity {
 
   @Column()
   lastName: string;
+
+  @OneToMany(
+    () => CustomerBlockFigureEntity,
+    (customerBlock) => customerBlock.customer,
+  )
+  blockFigures: CustomerBlockFigureEntity[];
 }

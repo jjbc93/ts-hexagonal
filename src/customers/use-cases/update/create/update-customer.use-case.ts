@@ -15,7 +15,7 @@ export class UpdateCustomerUseCase {
     if (!foundCustomer) {
       throw new NotFoundException('Customer not found');
     }
-    foundCustomer.updateCustomer(request.name, request.lastName);
+    foundCustomer.update(request.name, request.lastName);
     const updateCustomer = await this.customerRepository.update(foundCustomer);
     return updateCustomer;
   }

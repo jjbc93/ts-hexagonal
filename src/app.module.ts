@@ -10,6 +10,9 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { SharedModule } from './shared/infrastructure/shared.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { BlockFigureModule } from './block-figure/block-figure.module';
+import { BlockFigureEntity } from '@block-figure/infrastructure/storage/orm/block-figure.orm';
+import { CustomerBlockFigureEntity } from '@customers/infrastructure/storage/orm/customer-block-figure.entity';
 
 @Module({
   imports: [
@@ -23,7 +26,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
       username: 'myuser',
       password: 'mypassword',
       database: 'mydatabase',
-      entities: [CustomerEntity],
+      entities: [CustomerEntity, BlockFigureEntity, CustomerBlockFigureEntity],
       synchronize: true,
     }),
     TelegrafModule.forRootAsync({
@@ -52,6 +55,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
       }),
       inject: [ConfigService],
     }),
+    BlockFigureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -14,7 +14,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-    - pgdata:/var/lib/postgresql/data
+    #- pgdata:/var/lib/postgresql/data
+    - ts-ddd_pgdata:/var/lib/postgresql/data
   # app service for your backend
   app:
     container_name: nest-js
@@ -45,4 +46,5 @@ services:
     
 
 volumes:
-  pgdata:
+  ts-ddd_pgdata:
+    external: true
